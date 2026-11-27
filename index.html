@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GLOSSWORKS — Auto Detailing, Austin TX</title>
+<meta name="description" content="GLOSSWORKS is a made-up premium auto detailing shop in Austin, TX. Paint correction, ceramic coating, interior deep cleans. Dirt doesn't stand a chance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#07070a;
+    --surface:#0c0c11;
+    --card:#12121a;
+    --card-2:#171721;
+    --line:#262633;
+    --text:#f3f3f7;
+    --muted:#9c9caa;
+    --accent:#c8ff2f;
+    --accent-dim:#a8d922;
+    --hot:#ff5f3d;
+    --radius:18px;
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --font-display:"Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    --font-body:"Inter Tight", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--ink); color:var(--text);
+    font-family:var(--font-body); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  img{max-width:100%; display:block}
+  a{color:inherit; text-decoration:none}
+  ::selection{background:var(--accent); color:#0a0a0a}
+  :focus-visible{outline:3px solid var(--accent); outline-offset:3px; border-radius:6px}
+
+  .wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(18px,4vw,40px)}
+  .eyebrow{
+    font-family:var(--font-body); font-size:.72rem; font-weight:600;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--accent);
+  }
+  h1,h2,h3,h4{font-family:var(--font-display); font-weight:800; line-height:.95; letter-spacing:-.02em; margin:0; text-wrap:balance}
+  h2{font-size:clamp(2.1rem,5.2vw,3.9rem)}
+  h3{font-size:clamp(1.25rem,2.2vw,1.6rem); letter-spacing:-.01em}
+  p{margin:0; text-wrap:pretty}
+  .lede{color:var(--muted); font-size:clamp(1rem,1.4vw,1.12rem); max-width:56ch}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:.6em;
+    min-height:52px; padding:0 26px; border-radius:999px; border:1px solid transparent;
+    font-family:var(--font-body); font-weight:600; font-size:.98rem; letter-spacing:.01em;
+    cursor:pointer; transition:transform .18s var(--ease), background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn-primary{background:var(--accent); color:#0a0a0a}
+  .btn-primary:hover{background:#dcff6b; transform:translateY(-2px)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-ghost{background:transparent; color:var(--text); border-color:#3a3a4a}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:fixed; inset:0 0 auto 0; z-index:80;
+    display:flex; align-items:center; gap:18px;
+    padding:14px clamp(18px,4vw,40px);
+    background:linear-gradient(to bottom, rgba(7,7,10,.86), rgba(7,7,10,.28) 70%, transparent);
+    transition:background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.solid{
+    background:rgba(7,7,10,.9); backdrop-filter:blur(14px) saturate(1.2);
+    border-bottom-color:var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; letter-spacing:-.02em; font-size:1.12rem}
+  .brand .mark{
+    width:32px; height:32px; border-radius:10px; flex:0 0 auto;
+    background:conic-gradient(from 210deg, var(--accent), #6fe3ff, var(--accent));
+    box-shadow:inset 0 0 0 2px rgba(0,0,0,.5);
+    position:relative; overflow:hidden;
+  }
+  .brand .mark::after{
+    content:""; position:absolute; inset:-40% -120%;
+    background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.85) 50%, transparent 60%);
+    animation:markSweep 4.6s var(--ease) infinite;
+  }
+  @keyframes markSweep{0%,55%{transform:translateX(-30%)}85%,100%{transform:translateX(30%)}}
+  .nav-links{display:flex; align-items:center; gap:26px; margin-left:auto}
+  .nav-links a{font-size:.92rem; color:#d7d7e2; position:relative; padding:6px 2px}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--accent);
+    transition:width .25s var(--ease);
+  }
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{min-height:46px; padding:0 20px; font-size:.9rem}
+  .burger{
+    display:none; margin-left:auto; width:46px; height:46px; border-radius:12px;
+    background:#15151f; border:1px solid var(--line); color:var(--text);
+    align-items:center; justify-content:center; cursor:pointer;
+  }
+  .burger span{display:block; width:18px; height:2px; background:currentColor; position:relative}
+  .burger span::before,.burger span::after{content:""; position:absolute; left:0; width:18px; height:2px; background:currentColor}
+  .burger span::before{top:-6px} .burger span::after{top:6px}
+  @media (max-width:880px){
+    .nav-links{
+      position:fixed; inset:76px 14px auto 14px; flex-direction:column; align-items:stretch; gap:2px;
+      background:#0d0d14; border:1px solid var(--line); border-radius:16px; padding:10px;
+      transform:translateY(-12px); opacity:0; pointer-events:none; transition:.22s var(--ease);
+    }
+    .nav-links.open{transform:none; opacity:1; pointer-events:auto}
+    .nav-links a{padding:14px 12px; font-size:1rem; border-radius:10px}
+    .nav-links a:hover{background:#17171f}
+    .burger{display:inline-flex}
+    .nav-cta{display:none}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; min-height:100svh; display:flex; align-items:flex-end; padding-bottom:clamp(28px,6vh,64px); isolation:isolate}
+  .hero-media{position:absolute; inset:0; z-index:-2; overflow:hidden}
+  .hero-media img{width:100%; height:100%; object-fit:cover; object-position:50% 62%; filter:saturate(.92) contrast(1.06)}
+  .hero-media::after{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(7,7,10,.15), transparent 60%),
+      linear-gradient(to top, var(--ink) 4%, rgba(7,7,10,.72) 42%, rgba(7,7,10,.42) 78%);
+  }
+  .hero-spot{
+    position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background:radial-gradient(420px 420px at var(--mx,60%) var(--my,40%), rgba(200,255,47,.13), transparent 70%);
+    transition:background .12s linear;
+  }
+  .hero-inner{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(18px,4vw,40px)}
+  .hero h1{font-size:clamp(2.9rem,9vw,7.2rem); letter-spacing:-.035em}
+  .hero h1 em{font-style:normal; color:var(--accent)}
+  .hero .sub{margin-top:18px; max-width:44ch; color:#d3d3de; font-size:clamp(1rem,1.6vw,1.2rem)}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:22px; margin-top:38px; color:#b6b6c4; font-size:.86rem}
+  .hero-meta span{display:flex; align-items:center; gap:8px}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent)}
+  .badge-live{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:rgba(200,255,47,.12); border:1px solid rgba(200,255,47,.35); color:var(--accent); font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; margin-bottom:22px}
+
+  /* ---------- marquee ---------- */
+  .marquee{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#0a0a0f; overflow:hidden; padding:14px 0}
+  .marquee-track{display:flex; gap:0; width:max-content; animation:slide 38s linear infinite}
+  .marquee-track span{
+    font-family:var(--font-display); font-weight:800; font-size:clamp(.95rem,2vw,1.35rem);
+    letter-spacing:.02em; text-transform:uppercase; padding-inline:22px; color:#e9e9f1;
+    display:flex; align-items:center; gap:22px; white-space:nowrap;
+  }
+  .marquee-track span::after{content:"✳"; color:var(--accent); font-size:.9em}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- sections ---------- */
+  section{position:relative}
+  .band{padding:clamp(64px,10vw,128px) 0}
+  .band-alt{background:linear-gradient(180deg,#08080c,#0d0d13 40%,#08080c)}
+  .head{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(18px,4vw,40px); display:flex; flex-wrap:wrap; align-items:flex-end; gap:18px; justify-content:space-between}
+  .head .lede{margin-top:14px}
+
+  /* ---------- before/after ---------- */
+  .ba{
+    position:relative; margin-top:clamp(28px,4vw,48px); border-radius:var(--radius); overflow:hidden;
+    border:1px solid var(--line); background:#000; aspect-ratio:16/9; cursor:ew-resize;
+    touch-action:none; user-select:none;
+  }
+  .ba img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .ba .before-layer{filter:saturate(.42) brightness(.74) contrast(.94) sepia(.14)}
+  .ba .grime{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(120,110,85,.34), transparent 70%),
+      linear-gradient(180deg, rgba(90,88,70,.22), rgba(60,58,45,.3));
+    mix-blend-mode:multiply;
+  }
+  .ba .after-layer{clip-path:inset(0 calc(100% - var(--pct,50%)) 0 0)}
+  .ba .divider{
+    position:absolute; top:0; bottom:0; left:var(--pct,50%); width:2px; background:var(--accent);
+    box-shadow:0 0 24px rgba(200,255,47,.55); transform:translateX(-1px);
+  }
+  .ba .knob{
+    position:absolute; top:50%; left:var(--pct,50%); transform:translate(-50%,-50%);
+    width:52px; height:52px; border-radius:50%; background:var(--accent); color:#0a0a0a;
+    display:grid; place-items:center; font-weight:800; font-size:1rem;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+  }
+  .ba .tag{
+    position:absolute; top:14px; padding:6px 12px; border-radius:999px; font-size:.68rem;
+    letter-spacing:.16em; text-transform:uppercase; font-weight:600; background:rgba(7,7,10,.72);
+    border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(6px);
+  }
+  .ba .tag.b{left:14px} .ba .tag.a{right:14px; color:#0a0a0a; background:var(--accent); border-color:transparent}
+  .ba-hint{margin-top:12px; font-size:.82rem; color:var(--muted); display:flex; gap:8px; align-items:center}
+
+  /* ---------- packages ---------- */
+  .tiers{display:grid; gap:18px; grid-template-columns:repeat(3,1fr); margin-top:clamp(28px,4vw,48px)}
+  @media (max-width:960px){.tiers{grid-template-columns:1fr}}
+  .tier{
+    position:relative; border:1px solid var(--line); border-radius:var(--radius); padding:26px 24px 28px;
+    background:linear-gradient(180deg,var(--card),#0c0c12); overflow:hidden;
+    transition:transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .tier:hover{transform:translateY(-6px); border-color:#3d3d4f}
+  .tier::before{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(105deg, transparent 35%, rgba(255,255,255,.07) 50%, transparent 65%);
+    transform:translateX(-120%); transition:transform .8s var(--ease);
+  }
+  .tier:hover::before{transform:translateX(120%)}
+  .tier.featured{border-color:rgba(200,255,47,.5); background:linear-gradient(180deg,#151a10,#0c0c12)}
+  .tier .flag{
+    position:absolute; top:0; right:0; background:var(--accent); color:#0a0a0a;
+    font-size:.66rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    padding:7px 14px; border-bottom-left-radius:12px;
+  }
+  .tier .price{font-family:var(--font-display); font-weight:800; font-size:2.5rem; letter-spacing:-.03em; margin:14px 0 2px}
+  .tier .price small{font-size:.9rem; font-weight:500; color:var(--muted); letter-spacing:0}
+  .tier .time{color:var(--muted); font-size:.84rem; letter-spacing:.04em}
+  .tier ul{list-style:none; margin:20px 0 0; padding:0; display:grid; gap:9px}
+  .tier li{font-size:.92rem; color:#cfcfdb; display:flex; gap:10px; align-items:flex-start}
+  .tier li::before{content:"✓"; color:var(--accent); font-weight:800; flex:0 0 auto}
+  .tier .btn{margin-top:24px; width:100%}
+  .addons{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px}
+  .chip{
+    border:1px solid var(--line); background:#101018; border-radius:999px; padding:10px 16px;
+    font-size:.84rem; color:#cfcfdb; display:inline-flex; gap:8px; align-items:center;
+  }
+  .chip b{color:var(--accent); font-weight:600}
+
+  /* ---------- process ---------- */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:clamp(28px,4vw,48px)}
+  @media (max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.steps{grid-template-columns:1fr}}
+  .step{border:1px solid var(--line); border-radius:var(--radius); padding:22px; background:var(--card)}
+  .step .num{font-family:var(--font-display); font-size:2.4rem; font-weight:800; color:transparent; -webkit-text-stroke:1.5px var(--accent); line-height:1}
+  .step h3{margin:14px 0 8px; font-size:1.1rem}
+  .step p{color:var(--muted); font-size:.9rem}
+
+  .split{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(20px,4vw,52px); align-items:center; margin-top:clamp(28px,4vw,48px)}
+  @media (max-width:900px){.split{grid-template-columns:1fr}}
+  .shot{border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); position:relative}
+  .shot img{width:100%; height:100%; object-fit:cover; aspect-ratio:4/3}
+  .shot-cap{
+    position:absolute; left:14px; bottom:14px; padding:8px 14px; border-radius:10px;
+    background:rgba(7,7,10,.75); backdrop-filter:blur(8px); font-size:.78rem; color:#e3e3ec;
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .shot-duo{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .shot-duo.wide{margin-top:clamp(24px,3.5vw,44px); gap:16px}
+  .shot-duo.wide .shot img{aspect-ratio:16/9}
+  @media (max-width:700px){.shot-duo{grid-template-columns:1fr}}
+
+  /* ---------- gallery ---------- */
+  .gallery{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:170px; gap:12px; margin-top:clamp(28px,4vw,48px)}
+  .gallery a{position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--line); background:#000}
+  .gallery img{width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease), filter .4s}
+  .gallery a:hover img{transform:scale(1.07)}
+  .gallery .cap{
+    position:absolute; inset:auto 0 0 0; padding:26px 14px 12px; font-size:.78rem; color:#fff;
+    background:linear-gradient(to top, rgba(7,7,10,.9), transparent);
+    opacity:0; transform:translateY(8px); transition:.3s var(--ease);
+  }
+  .gallery a:hover .cap{opacity:1; transform:none}
+  .gallery .span2{grid-column:span 2; grid-row:span 2}
+  @media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr); grid-auto-rows:140px}}
+
+  /* ---------- testimonials ---------- */
+  .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:clamp(28px,4vw,48px)}
+  @media (max-width:900px){.quotes{grid-template-columns:1fr}}
+  .quote{border:1px solid var(--line); border-radius:var(--radius); padding:24px; background:var(--card)}
+  .quote p{font-family:var(--font-display); font-size:1.08rem; line-height:1.35; letter-spacing:-.01em}
+  .quote .who{margin-top:16px; font-size:.82rem; color:var(--muted); display:flex; align-items:center; gap:10px}
+  .quote .av{width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#2b2b3a,#3f4a22); border:1px solid var(--line)}
+  .placeholder-note{margin-top:16px; font-size:.76rem; color:#7c7c8c; letter-spacing:.06em; text-transform:uppercase}
+
+  /* ---------- booking ---------- */
+  .booking{display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(20px,4vw,54px); align-items:start}
+  @media (max-width:900px){.booking{grid-template-columns:1fr}}
+  .form-card{border:1px solid var(--line); border-radius:var(--radius); padding:clamp(20px,3vw,32px); background:linear-gradient(180deg,var(--card-2),#0b0b11)}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media (max-width:560px){.grid-2{grid-template-columns:1fr}}
+  label{display:block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:#a9a9b8; margin-bottom:8px; font-weight:600}
+  input,select,textarea{
+    width:100%; min-height:52px; padding:14px 16px; border-radius:12px;
+    background:#0a0a10; border:1px solid #2b2b39; color:var(--text); font-family:var(--font-body); font-size:.95rem;
+    transition:border-color .2s var(--ease), background .2s var(--ease);
+  }
+  textarea{min-height:104px; resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:none; border-color:var(--accent); background:#0d0d15}
+  input:user-invalid{border-color:#7a3a3a}
+  .field{margin-bottom:16px}
+  .form-foot{display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-top:6px}
+  .form-foot .btn{flex:1 1 200px}
+  .fineprint{font-size:.76rem; color:#7c7c8c; margin-top:14px}
+  .success{
+    display:none; border:1px solid rgba(200,255,47,.45); background:linear-gradient(180deg,#141a0d,#0b0b11);
+    border-radius:var(--radius); padding:26px;
+  }
+  .success.show{display:block; animation:pop .4s var(--ease)}
+  @keyframes pop{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+  .ref{font-family:var(--font-display); font-size:1.6rem; letter-spacing:.02em; color:var(--accent); margin:10px 0}
+  .side-list{display:grid; gap:14px}
+  .side-item{display:flex; gap:14px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--card)}
+  .side-item .ic{width:38px; height:38px; border-radius:10px; background:#1b2410; border:1px solid #2e3a1a; display:grid; place-items:center; color:var(--accent); flex:0 0 auto; font-weight:800}
+  .side-item h4{font-size:.98rem; font-family:var(--font-body); font-weight:600; letter-spacing:0}
+  .side-item p{font-size:.85rem; color:var(--muted)}
+
+  /* ---------- faq ---------- */
+  .faq{display:grid; gap:10px; margin-top:clamp(28px,4vw,48px); max-width:900px}
+  details{border:1px solid var(--line); border-radius:14px; background:var(--card); padding:0 18px}
+  details[open]{border-color:#3d3d4f}
+  summary{cursor:pointer; padding:18px 0; font-weight:600; font-size:.98rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:44px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+"; color:var(--accent); font-size:1.3rem; line-height:1; transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{padding:0 0 18px; color:var(--muted); font-size:.92rem}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); background:#06060a; padding:clamp(44px,7vw,80px) 0 28px}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:32px}
+  @media (max-width:800px){.foot-grid{grid-template-columns:1fr; gap:24px}}
+  .foot-grid h4{font-family:var(--font-body); font-size:.76rem; letter-spacing:.2em; text-transform:uppercase; color:#8a8a9a; margin-bottom:14px}
+  .foot-grid ul{list-style:none; margin:0; padding:0; display:grid; gap:9px; font-size:.9rem; color:#c9c9d6}
+  .foot-grid a:hover{color:var(--accent)}
+  .foot-bottom{margin-top:44px; padding-top:20px; border-top:1px solid #1b1b25; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:.78rem; color:#77778a}
+  .foot-logo{font-family:var(--font-display); font-size:clamp(2rem,6vw,3.4rem); font-weight:800; letter-spacing:-.03em; color:#15151f; -webkit-text-stroke:1px #2a2a38; line-height:1; margin-top:24px}
+
+  /* ---------- reveal ---------- */
+  .rv{opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+  .rv.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important}
+    html{scroll-behavior:auto}
+    .rv{opacity:1; transform:none}
+    .marquee-track{animation:none; overflow:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="GLOSSWORKS home">
+    <span class="mark" aria-hidden="true"></span>GLOSSWORKS
+  </a>
+  <nav class="nav-links" id="navLinks" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#packages">Packages</a>
+    <a href="#process">Process</a>
+    <a href="#book">Book</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a class="btn btn-primary nav-cta" href="#book">Book a slot</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-media">
+      <img src="img/hero.jpg" alt="A dark grey performance car photographed head-on in an empty lot at dusk">
+    </div>
+    <div class="hero-spot" id="heroSpot"></div>
+    <div class="hero-inner">
+      <div class="badge-live"><span class="dot"></span> Austin, TX · 2 slots left this week</div>
+      <h1>We make dirty cars<br>look <em>guilty.</em></h1>
+      <p class="sub">Paint correction, ceramic coating, and interior rescues done by people who genuinely have no other hobbies. Your car will leave shinier than the day it was built.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#book">Book a slot</a>
+        <a class="btn btn-ghost" href="#work">See the shine</a>
+      </div>
+      <div class="hero-meta">
+        <span><span class="dot"></span> Mobile service + studio bay</span>
+        <span>Fully insured</span>
+        <span>5-year coating warranty</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Paint correction</span><span>Ceramic coating</span><span>Interior deep clean</span><span>Odor bomb</span><span>Headlight restoration</span><span>Engine bay detail</span>
+      <span>Paint correction</span><span>Ceramic coating</span><span>Interior deep clean</span><span>Odor bomb</span><span>Headlight restoration</span><span>Engine bay detail</span>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <section class="band" id="work">
+    <div class="head">
+      <div>
+        <p class="eyebrow">The proof</p>
+        <h2>Drag it. We dare you.</h2>
+        <p class="lede">Same car, same parking lot, four hours apart. Slide the handle to see what a full paint decontamination and two-stage correction actually looks like.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="ba" id="ba" role="slider" tabindex="0" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50 percent cleaned">
+        <img class="before-layer" src="img/beforeafter.jpg" alt="The same car before detailing — dull, dusty paint">
+        <div class="grime" aria-hidden="true"></div>
+        <img class="after-layer" src="img/beforeafter.jpg" alt="The same car after detailing — glossy, reflective paint">
+        <span class="tag b">Before</span>
+        <span class="tag a">After</span>
+        <div class="divider" aria-hidden="true"></div>
+        <div class="knob" aria-hidden="true">↔</div>
+      </div>
+      <p class="ba-hint">↔ Drag, or use the arrow keys. Yes, we cheated with CSS — the real thing is even better.</p>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="band band-alt" id="packages">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Packages</p>
+        <h2>Pick your level of<br>irresponsible.</h2>
+        <p class="lede">Flat pricing, no upsell theatrics. Every package includes a free walk-around and a honest "you don't need that" conversation.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="tiers">
+        <article class="tier rv">
+          <h3>Express Shine</h3>
+          <p class="time">~2 hours · same-day</p>
+          <div class="price">$149</div>
+          <ul>
+            <li>Hand wash + clay bar decontamination</li>
+            <li>Wheels, tires, and wheel wells</li>
+            <li>Spray sealant, 3-month protection</li>
+            <li>Interior vacuum + wipe down</li>
+          </ul>
+          <a class="btn btn-ghost" href="#book" data-package="Express Shine">Choose Express</a>
+        </article>
+
+        <article class="tier featured rv">
+          <span class="flag">Most booked</span>
+          <h3>Full Reset</h3>
+          <p class="time">~6 hours · drop-off</p>
+          <div class="price">$399</div>
+          <ul>
+            <li>Everything in Express, plus:</li>
+            <li>One-stage machine paint correction</li>
+            <li>Steam interior deep clean + extraction</li>
+            <li>Leather clean and condition</li>
+            <li>6-month ceramic spray coating</li>
+          </ul>
+          <a class="btn btn-primary" href="#book" data-package="Full Reset">Choose Full Reset</a>
+        </article>
+
+        <article class="tier rv">
+          <h3>Obsessive</h3>
+          <p class="time">2 days · studio only</p>
+          <div class="price">$899</div>
+          <ul>
+            <li>Two-stage paint correction + gloss meter report</li>
+            <li>5-year ceramic coating, pro-grade</li>
+            <li>Glass, trim, and wheel-face coating</li>
+            <li>Engine bay detail</li>
+            <li>Interior deep clean + ozone treatment</li>
+          </ul>
+          <a class="btn btn-ghost" href="#book" data-package="Obsessive">Choose Obsessive</a>
+        </article>
+      </div>
+
+      <div class="addons" aria-label="Add-ons">
+        <span class="chip">Headlight restoration <b>+$79</b></span>
+        <span class="chip">Pet hair removal <b>+$60</b></span>
+        <span class="chip">Odor bomb <b>+$45</b></span>
+        <span class="chip">Engine bay <b>+$90</b></span>
+        <span class="chip">Wheel-off deep clean <b>+$120</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="band" id="process">
+    <div class="head">
+      <div>
+        <p class="eyebrow">How it goes</p>
+        <h2>Four steps. Zero<br>mystery.</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="shot-duo wide">
+        <div class="shot"><img src="img/wash.jpg" alt="A detailer washing a black car with soapy water and grit-guard buckets" loading="lazy"><span class="shot-cap">Two-bucket method, always</span></div>
+        <div class="shot"><img src="img/spray.jpg" alt="High pressure water spray rinsing the rear of a black car" loading="lazy"><span class="shot-cap">Decon rinse</span></div>
+      </div>
+      <div class="steps">
+          <div class="step rv">
+            <div class="num">01</div>
+            <h3>Send photos</h3>
+            <p>Text us the car and the mess. We reply with a real quote, not a "starting at."</p>
+          </div>
+          <div class="step rv">
+            <div class="num">02</div>
+            <h3>Lock a slot</h3>
+            <p>Pick a day. We hold the bay and send a checklist so nothing gets missed.</p>
+          </div>
+          <div class="step rv">
+            <div class="num">03</div>
+            <h3>We go to work</h3>
+            <p>You get progress photos at the ugly middle stage. It gets worse before it gets great.</p>
+          </div>
+          <div class="step rv">
+            <div class="num">04</div>
+            <h3>Walk-around</h3>
+            <p>Lights on, panels open, we show you exactly what changed. Then you drive away smug.</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="band band-alt" id="gallery">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Recent work</p>
+        <h2>Cars we've rescued.</h2>
+        <p class="lede">A made-up portfolio, because this is a trial run. The photos are real stock, the shine is real.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="gallery">
+        <a href="#gallery" class="span2"><img src="img/g-mclaren.jpg" alt="White McLaren supercar detailed and parked on gravel" loading="lazy"><span class="cap">McLaren 720S · ceramic + paint correction</span></a>
+        <a href="#gallery"><img src="img/g-camaro.jpg" alt="Blue Chevrolet Camaro with black hood at golden hour" loading="lazy"><span class="cap">Camaro · gloss enhancement</span></a>
+        <a href="#gallery"><img src="img/g-r8.jpg" alt="Close-up of the rear taillight of an Audi R8 at sunset" loading="lazy"><span class="cap">Audi R8 · rear end detail</span></a>
+        <a href="#gallery"><img src="img/g-m4.jpg" alt="Grey BMW M4 coupe at dusk on asphalt" loading="lazy"><span class="cap">M4 · full reset</span></a>
+        <a href="#gallery"><img src="img/g-porsche.jpg" alt="Black Porsche Panamera seen from behind on a road" loading="lazy"><span class="cap">Panamera · coating + interior</span></a>
+        <a href="#gallery"><img src="img/g-ferrari.jpg" alt="Yellow race car with sponsor decals on a tree-lined road" loading="lazy"><span class="cap">Track car · pre-event prep</span></a>
+        <a href="#gallery"><img src="img/g-aston.jpg" alt="Red sports coupe parked beside a white stone building" loading="lazy"><span class="cap">Red coupe · correction</span></a>
+        <a href="#gallery"><img src="img/interior.jpg" alt="Driver's view of a steering wheel with city lights ahead" loading="lazy"><span class="cap">Interior · deep clean</span></a>
+        <a href="#gallery"><img src="img/engine.jpg" alt="Hands working on a car engine with a wrench" loading="lazy"><span class="cap">Engine bay · detail</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="band">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Word of mouth</p>
+        <h2>People say nice things.</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="quotes">
+        <div class="quote rv">
+          <p>"I bought the car used with dog hair in every seam. It came back smelling like nothing at all, which is exactly what I wanted."</p>
+          <div class="who"><span class="av" aria-hidden="true"></span> Dana R. · 2019 wagon</div>
+        </div>
+        <div class="quote rv">
+          <p>"They talked me out of the expensive package because my paint didn't need it. That's the whole reason I'll go back."</p>
+          <div class="who"><span class="av" aria-hidden="true"></span> Marcus T. · 2016 coupe</div>
+        </div>
+        <div class="quote rv">
+          <p>"Booked at 9pm, photos of the process by noon the next day, keys back before dinner. Ridiculous service."</p>
+          <div class="who"><span class="av" aria-hidden="true"></span> Priya N. · 2021 SUV</div>
+        </div>
+      </div>
+      <p class="placeholder-note">Placeholder testimonials — swap for real reviews when you go live.</p>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="band band-alt" id="book">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Book it</p>
+        <h2>Tell us about the mess.</h2>
+        <p class="lede">This form is a mock-up — nothing actually gets sent yet. Fill it in and watch it pretend to work.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="booking">
+        <div class="side-list">
+          <div class="side-item">
+            <span class="ic" aria-hidden="true">◈</span>
+            <div><h4>Studio bay</h4><p>412 Foundry Row, Unit B · Austin, TX. Behind the coffee place with the awful parking.</p></div>
+          </div>
+          <div class="side-item">
+            <span class="ic" aria-hidden="true">◷</span>
+            <div><h4>Hours</h4><p>Mon–Sat, 8am–6pm. Sundays are for the dog and the pressure washer.</p></div>
+          </div>
+          <div class="side-item">
+            <span class="ic" aria-hidden="true">☎</span>
+            <div><h4>Text first</h4><p>(512) 555-0142 · Send photos, get a real quote in about an hour.</p></div>
+          </div>
+          <div class="side-item">
+            <span class="ic" aria-hidden="true">✦</span>
+            <div><h4>Mobile service</h4><p>We can come to you within 20 miles, if you have a hose and a plug.</p></div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="bookingForm" novalidate>
+            <div class="grid-2">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" placeholder="First and last" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="(512) 555-0000" required autocomplete="tel">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="vehicle">Vehicle</label>
+                <input id="vehicle" name="vehicle" type="text" placeholder="Year, make, model, color" required>
+              </div>
+              <div class="field">
+                <label for="package">Package</label>
+                <select id="package" name="package" required>
+                  <option value="">Choose one</option>
+                  <option>Express Shine — $149</option>
+                  <option>Full Reset — $399</option>
+                  <option>Obsessive — $899</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="date">Preferred day</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="notes">What are we dealing with?</label>
+              <textarea id="notes" name="notes" placeholder="Dog hair, coffee on the seats, swirl marks, mysterious smell..."></textarea>
+            </div>
+            <div class="form-foot">
+              <button class="btn btn-primary" type="submit">Request this slot</button>
+            </div>
+            <p class="fineprint" id="formMsg">We reply within one business hour. No deposit until we've seen the car.</p>
+          </form>
+
+          <div class="success" id="success" role="status" aria-live="polite">
+            <p class="eyebrow">Slot requested</p>
+            <div class="ref" id="refCode">GW-0000</div>
+            <p id="successText">We'll text you shortly to confirm.</p>
+            <div class="form-foot">
+              <button class="btn btn-ghost" type="button" id="againBtn">Book another</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band" id="faq">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2>The usual ones.</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="faq">
+        <details>
+          <summary>How long does a coating actually last?</summary>
+          <p>Our pro-grade coating is rated five years with basic upkeep. Realistically: three to four years of genuinely easy washing, longer if you park indoors. We'll tell you the honest number, not the brochure one.</p>
+        </details>
+        <details>
+          <summary>Can you fix scratches, or just hide them?</summary>
+          <p>Correction removes paint defects — swirls, oxidation, light scratches — by leveling the clear coat. Deep scratches that catch a fingernail need touch-up first. We measure paint thickness before touching anything.</p>
+        </details>
+        <details>
+          <summary>Do you need my car all day?</summary>
+          <p>Express is about two hours. Full Reset is a drop-off. Obsessive is two days because coatings need to cure in a controlled bay.</p>
+        </details>
+        <details>
+          <summary>What if it rains?</summary>
+          <p>Rain doesn't hurt a cured coating. We do the work indoors, and we'll happily reschedule a correction job if the humidity is fighting us.</p>
+        </details>
+        <details>
+          <summary>Is this a real business?</summary>
+          <p>Not yet — this whole site is a trial run with made-up prices, made-up reviews, and stock photography. The shine, however, is real.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>GLOSSWORKS</a>
+        <p style="margin-top:16px; color:#9c9caa; max-width:34ch; font-size:.92rem">Auto detailing for people who notice the reflection in their own bumper. Austin, TX.</p>
+        <div class="foot-logo" aria-hidden="true">GLOSSWORKS</div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#packages">Paint correction</a></li>
+          <li><a href="#packages">Ceramic coating</a></li>
+          <li><a href="#packages">Interior deep clean</a></li>
+          <li><a href="#packages">Engine bay detail</a></li>
+          <li><a href="#packages">Headlight restoration</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li>412 Foundry Row, Unit B</li>
+          <li>Austin, TX 78702</li>
+          <li><a href="tel:+15125550142">(512) 555-0142</a></li>
+          <li><a href="mailto:hey@glossworks.example">hey@glossworks.example</a></li>
+          <li>Mon–Sat · 8am–6pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr">2026</span> GLOSSWORKS. A made-up company, for demonstration purposes.</span>
+      <span>Stock photography via Unsplash.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* year */
+  var yr = document.getElementById("yr");
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  /* nav solid on scroll */
+  var nav = document.getElementById("nav");
+  var onScroll = function(){
+    if (window.scrollY > 40) nav.classList.add("solid");
+    else nav.classList.remove("solid");
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, {passive:true});
+
+  /* mobile menu */
+  var burger = document.getElementById("burger");
+  var links = document.getElementById("navLinks");
+  burger.addEventListener("click", function(){
+    var open = links.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  links.addEventListener("click", function(e){
+    if (e.target.tagName === "A" && links.classList.contains("open")) {
+      links.classList.remove("open");
+      burger.setAttribute("aria-expanded","false");
+    }
+  });
+
+  /* hero spotlight */
+  var hero = document.getElementById("hero");
+  var spot = document.getElementById("heroSpot");
+  if (hero && spot && !reduceMotion && window.matchMedia("(hover:hover)").matches) {
+    hero.addEventListener("pointermove", function(e){
+      var r = hero.getBoundingClientRect();
+      spot.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
+      spot.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
+    });
+  }
+
+  /* before / after slider */
+  var ba = document.getElementById("ba");
+  var pct = 50;
+  function setPct(v, announce){
+    pct = Math.max(0, Math.min(100, v));
+    ba.style.setProperty("--pct", pct + "%");
+    ba.setAttribute("aria-valuenow", Math.round(pct));
+    ba.setAttribute("aria-valuetext", Math.round(pct) + " percent cleaned");
+  }
+  function pctFromEvent(e){
+    var r = ba.getBoundingClientRect();
+    return (e.clientX - r.left) / r.width * 100;
+  }
+  var dragging = false;
+  ba.addEventListener("pointerdown", function(e){
+    dragging = true;
+    ba.setPointerCapture(e.pointerId);
+    setPct(pctFromEvent(e));
+  });
+  ba.addEventListener("pointermove", function(e){
+    if (dragging) setPct(pctFromEvent(e));
+  });
+  ba.addEventListener("pointerup", function(e){
+    dragging = false;
+    try { ba.releasePointerCapture(e.pointerId); } catch(err){}
+  });
+  ba.addEventListener("pointercancel", function(){ dragging = false; });
+  ba.addEventListener("keydown", function(e){
+    var step = e.shiftKey ? 10 : 2;
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); setPct(pct - step); }
+    else if (e.key === "ArrowRight" || e.key === "ArrowUp") { e.preventDefault(); setPct(pct + step); }
+    else if (e.key === "Home") { e.preventDefault(); setPct(0); }
+    else if (e.key === "End") { e.preventDefault(); setPct(100); }
+  });
+  setPct(50);
+
+  /* package buttons prefill the form */
+  document.querySelectorAll("[data-package]").forEach(function(a){
+    a.addEventListener("click", function(){
+      var sel = document.getElementById("package");
+      var want = a.getAttribute("data-package");
+      if (!sel) return;
+      for (var i=0;i<sel.options.length;i++){
+        if (sel.options[i].text.indexOf(want) === 0) { sel.selectedIndex = i; break; }
+      }
+    });
+  });
+
+  /* reveal on scroll */
+  var rv = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {rootMargin:"0px 0px -12% 0px", threshold:0.12});
+    rv.forEach(function(el){ io.observe(el); });
+  } else {
+    rv.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* booking form (mock) */
+  var form = document.getElementById("bookingForm");
+  var success = document.getElementById("success");
+  var msg = document.getElementById("formMsg");
+  var refEl = document.getElementById("refCode");
+  var successText = document.getElementById("successText");
+
+  /* min date = today */
+  var dateInput = document.getElementById("date");
+  var today = new Date();
+  var iso = today.getFullYear() + "-" + String(today.getMonth()+1).padStart(2,"0") + "-" + String(today.getDate()).padStart(2,"0");
+  dateInput.min = iso;
+
+  function makeRef(){
+    var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    var out = "";
+    for (var i=0;i<4;i++) out += chars.charAt(Math.floor(Math.random()*chars.length));
+    return "GW-" + out;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var required = form.querySelectorAll("[required]");
+    var missing = [];
+    required.forEach(function(el){
+      if (!el.value.trim()) missing.push(el);
+    });
+    if (missing.length) {
+      msg.textContent = "Almost — we still need: " + missing.map(function(el){
+        return (el.previousElementSibling ? el.previousElementSibling.textContent : el.name).toLowerCase();
+      }).join(", ") + ".";
+      msg.style.color = "#ff8a6f";
+      missing[0].focus();
+      return;
+    }
+    var data = {
+      name: document.getElementById("name").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      vehicle: document.getElementById("vehicle").value.trim(),
+      package: document.getElementById("package").value,
+      date: document.getElementById("date").value,
+      notes: document.getElementById("notes").value.trim()
+    };
+    var ref = makeRef();
+    data.ref = ref;
+    try { localStorage.setItem("glossworks_booking", JSON.stringify(data)); } catch(err){}
+
+    var d = new Date(data.date + "T12:00:00");
+    var nice = d.toLocaleDateString(undefined, {weekday:"long", month:"long", day:"numeric"});
+    refEl.textContent = ref;
+    successText.textContent = "Thanks " + data.name.split(" ")[0] + " — we've pencilled you in for " + nice + " (" + data.package + ") for the " + data.vehicle + ". We'll text " + data.phone + " to confirm.";
+    form.style.display = "none";
+    success.classList.add("show");
+    success.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"});
+  });
+
+  document.getElementById("againBtn").addEventListener("click", function(){
+    form.reset();
+    form.style.display = "";
+    success.classList.remove("show");
+    msg.textContent = "We reply within one business hour. No deposit until we've seen the car.";
+    msg.style.color = "";
+    document.getElementById("name").focus();
+  });
+})();
+</script>
+</body>
+</html>
