@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GLOSSWORKS — Auto Detailing, Austin TX</title>
-<meta name="description" content="GLOSSWORKS is a made-up premium auto detailing shop in Austin, TX. Paint correction, ceramic coating, interior deep cleans. Dirt doesn't stand a chance.">
+<title>RED LINE DETAILING LLC — Auto Detailing, Senatobia MS</title>
+<meta name="description" content="RED LINE DETAILING LLC is a made-up premium auto detailing shop in Senatobia, MS. Paint correction, ceramic coating, interior deep cleans. Dirt doesn't stand a chance.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,8 +17,9 @@
     --line:#262633;
     --text:#f3f3f7;
     --muted:#9c9caa;
-    --accent:#c8ff2f;
-    --accent-dim:#a8d922;
+    --accent:#ff2f2f;
+    --accent-strong:#dc1a22;
+    --accent-dim:#c41b22;
     --hot:#ff5f3d;
     --radius:18px;
     --maxw:1180px;
@@ -57,8 +58,8 @@
     cursor:pointer; transition:transform .18s var(--ease), background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease);
     -webkit-tap-highlight-color:transparent;
   }
-  .btn-primary{background:var(--accent); color:#0a0a0a}
-  .btn-primary:hover{background:#dcff6b; transform:translateY(-2px)}
+  .btn-primary{background:var(--accent-strong); color:#fff}
+  .btn-primary:hover{background:#f5303a; transform:translateY(-2px)}
   .btn-primary:active{transform:translateY(0)}
   .btn-ghost{background:transparent; color:var(--text); border-color:#3a3a4a}
   .btn-ghost:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
@@ -77,9 +78,11 @@
     border-bottom-color:var(--line);
   }
   .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; letter-spacing:-.02em; font-size:1.12rem}
+  .brand-sub{font-weight:600; opacity:.85}
+  @media (max-width:520px){.brand-sub{display:none}}
   .brand .mark{
     width:32px; height:32px; border-radius:10px; flex:0 0 auto;
-    background:conic-gradient(from 210deg, var(--accent), #6fe3ff, var(--accent));
+    background:conic-gradient(from 210deg, #ff2f2f, #ff9d3c, #b3121b, #ff2f2f);
     box-shadow:inset 0 0 0 2px rgba(0,0,0,.5);
     position:relative; overflow:hidden;
   }
@@ -130,7 +133,7 @@
   }
   .hero-spot{
     position:absolute; inset:0; z-index:-1; pointer-events:none;
-    background:radial-gradient(420px 420px at var(--mx,60%) var(--my,40%), rgba(200,255,47,.13), transparent 70%);
+    background:radial-gradient(420px 420px at var(--mx,60%) var(--my,40%), rgba(255,47,47,.17), transparent 70%);
     transition:background .12s linear;
   }
   .hero-inner{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(18px,4vw,40px)}
@@ -141,7 +144,7 @@
   .hero-meta{display:flex; flex-wrap:wrap; gap:22px; margin-top:38px; color:#b6b6c4; font-size:.86rem}
   .hero-meta span{display:flex; align-items:center; gap:8px}
   .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent)}
-  .badge-live{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:rgba(200,255,47,.12); border:1px solid rgba(200,255,47,.35); color:var(--accent); font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; margin-bottom:22px}
+  .badge-live{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:rgba(255,47,47,.14); border:1px solid rgba(255,47,47,.45); color:var(--accent); font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; margin-bottom:22px}
 
   /* ---------- marquee ---------- */
   .marquee{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#0a0a0f; overflow:hidden; padding:14px 0}
@@ -179,7 +182,7 @@
   .ba .after-layer{clip-path:inset(0 calc(100% - var(--pct,50%)) 0 0)}
   .ba .divider{
     position:absolute; top:0; bottom:0; left:var(--pct,50%); width:2px; background:var(--accent);
-    box-shadow:0 0 24px rgba(200,255,47,.55); transform:translateX(-1px);
+    box-shadow:0 0 24px rgba(255,47,47,.6); transform:translateX(-1px);
   }
   .ba .knob{
     position:absolute; top:50%; left:var(--pct,50%); transform:translate(-50%,-50%);
@@ -210,7 +213,7 @@
     transform:translateX(-120%); transition:transform .8s var(--ease);
   }
   .tier:hover::before{transform:translateX(120%)}
-  .tier.featured{border-color:rgba(200,255,47,.5); background:linear-gradient(180deg,#151a10,#0c0c12)}
+  .tier.featured{border-color:rgba(255,47,47,.55); background:linear-gradient(180deg,#1b1113,#0c0c12)}
   .tier .flag{
     position:absolute; top:0; right:0; background:var(--accent); color:#0a0a0a;
     font-size:.66rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
@@ -273,7 +276,7 @@
   .quote{border:1px solid var(--line); border-radius:var(--radius); padding:24px; background:var(--card)}
   .quote p{font-family:var(--font-display); font-size:1.08rem; line-height:1.35; letter-spacing:-.01em}
   .quote .who{margin-top:16px; font-size:.82rem; color:var(--muted); display:flex; align-items:center; gap:10px}
-  .quote .av{width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#2b2b3a,#3f4a22); border:1px solid var(--line)}
+  .quote .av{width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#2b2b3a,#5a2026); border:1px solid var(--line)}
   .placeholder-note{margin-top:16px; font-size:.76rem; color:#7c7c8c; letter-spacing:.06em; text-transform:uppercase}
 
   /* ---------- booking ---------- */
@@ -296,7 +299,7 @@
   .form-foot .btn{flex:1 1 200px}
   .fineprint{font-size:.76rem; color:#7c7c8c; margin-top:14px}
   .success{
-    display:none; border:1px solid rgba(200,255,47,.45); background:linear-gradient(180deg,#141a0d,#0b0b11);
+    display:none; border:1px solid rgba(255,47,47,.5); background:linear-gradient(180deg,#1a0e10,#0b0b11);
     border-radius:var(--radius); padding:26px;
   }
   .success.show{display:block; animation:pop .4s var(--ease)}
@@ -304,7 +307,7 @@
   .ref{font-family:var(--font-display); font-size:1.6rem; letter-spacing:.02em; color:var(--accent); margin:10px 0}
   .side-list{display:grid; gap:14px}
   .side-item{display:flex; gap:14px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--card)}
-  .side-item .ic{width:38px; height:38px; border-radius:10px; background:#1b2410; border:1px solid #2e3a1a; display:grid; place-items:center; color:var(--accent); flex:0 0 auto; font-weight:800}
+  .side-item .ic{width:38px; height:38px; border-radius:10px; background:#2a1114; border:1px solid #4a1d22; display:grid; place-items:center; color:var(--accent); flex:0 0 auto; font-weight:800}
   .side-item h4{font-size:.98rem; font-family:var(--font-body); font-weight:600; letter-spacing:0}
   .side-item p{font-size:.85rem; color:var(--muted)}
 
@@ -342,8 +345,8 @@
 <body>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="GLOSSWORKS home">
-    <span class="mark" aria-hidden="true"></span>GLOSSWORKS
+  <a class="brand" href="#top" aria-label="Red Line Detailing home">
+    <span class="mark" aria-hidden="true"></span>RED LINE<span class="brand-sub"> DETAILING</span>
   </a>
   <nav class="nav-links" id="navLinks" aria-label="Main">
     <a href="#work">Work</a>
@@ -365,7 +368,7 @@
     </div>
     <div class="hero-spot" id="heroSpot"></div>
     <div class="hero-inner">
-      <div class="badge-live"><span class="dot"></span> Austin, TX · 2 slots left this week</div>
+      <div class="badge-live"><span class="dot"></span> Senatobia, MS · 2 slots left this week</div>
       <h1>We make dirty cars<br>look <em>guilty.</em></h1>
       <p class="sub">Paint correction, ceramic coating, and interior rescues done by people who genuinely have no other hobbies. Your car will leave shinier than the day it was built.</p>
       <div class="hero-actions">
@@ -577,7 +580,7 @@
         <div class="side-list">
           <div class="side-item">
             <span class="ic" aria-hidden="true">◈</span>
-            <div><h4>Studio bay</h4><p>412 Foundry Row, Unit B · Austin, TX. Behind the coffee place with the awful parking.</p></div>
+            <div><h4>Studio bay</h4><p>204 Highway 51 N, Suite B · Senatobia, MS. Behind the coffee place with the awful parking.</p></div>
           </div>
           <div class="side-item">
             <span class="ic" aria-hidden="true">◷</span>
@@ -585,7 +588,7 @@
           </div>
           <div class="side-item">
             <span class="ic" aria-hidden="true">☎</span>
-            <div><h4>Text first</h4><p>(512) 555-0142 · Send photos, get a real quote in about an hour.</p></div>
+            <div><h4>Text first</h4><p>(662) 555-0142 · Send photos, get a real quote in about an hour.</p></div>
           </div>
           <div class="side-item">
             <span class="ic" aria-hidden="true">✦</span>
@@ -602,7 +605,7 @@
               </div>
               <div class="field">
                 <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" placeholder="(512) 555-0000" required autocomplete="tel">
+                <input id="phone" name="phone" type="tel" placeholder="(662) 555-0000" required autocomplete="tel">
               </div>
             </div>
             <div class="grid-2">
@@ -637,7 +640,7 @@
 
           <div class="success" id="success" role="status" aria-live="polite">
             <p class="eyebrow">Slot requested</p>
-            <div class="ref" id="refCode">GW-0000</div>
+            <div class="ref" id="refCode">RL-0000</div>
             <p id="successText">We'll text you shortly to confirm.</p>
             <div class="form-foot">
               <button class="btn btn-ghost" type="button" id="againBtn">Book another</button>
@@ -688,9 +691,9 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>GLOSSWORKS</a>
-        <p style="margin-top:16px; color:#9c9caa; max-width:34ch; font-size:.92rem">Auto detailing for people who notice the reflection in their own bumper. Austin, TX.</p>
-        <div class="foot-logo" aria-hidden="true">GLOSSWORKS</div>
+        <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>RED LINE<span class="brand-sub"> DETAILING</span></a>
+        <p style="margin-top:16px; color:#9c9caa; max-width:34ch; font-size:.92rem">Auto detailing for people who notice the reflection in their own bumper. Senatobia, MS.</p>
+        <div class="foot-logo" aria-hidden="true">RED LINE</div>
       </div>
       <div>
         <h4>Services</h4>
@@ -705,16 +708,16 @@
       <div>
         <h4>Shop</h4>
         <ul>
-          <li>412 Foundry Row, Unit B</li>
-          <li>Austin, TX 78702</li>
-          <li><a href="tel:+15125550142">(512) 555-0142</a></li>
-          <li><a href="mailto:hey@glossworks.example">hey@glossworks.example</a></li>
+          <li>204 Highway 51 N, Suite B</li>
+          <li>Senatobia, MS 38668</li>
+          <li><a href="tel:+16625550142">(662) 555-0142</a></li>
+          <li><a href="mailto:hey@redlinedetailing.example">hey@redlinedetailing.example</a></li>
           <li>Mon–Sat · 8am–6pm</li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr">2026</span> GLOSSWORKS. A made-up company, for demonstration purposes.</span>
+      <span>© <span id="yr">2026</span> RED LINE DETAILING LLC. A made-up company, for demonstration purposes.</span>
       <span>Stock photography via Unsplash.</span>
     </div>
   </div>
@@ -842,7 +845,7 @@
     var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     var out = "";
     for (var i=0;i<4;i++) out += chars.charAt(Math.floor(Math.random()*chars.length));
-    return "GW-" + out;
+    return "RL-" + out;
   }
 
   form.addEventListener("submit", function(e){
@@ -870,7 +873,7 @@
     };
     var ref = makeRef();
     data.ref = ref;
-    try { localStorage.setItem("glossworks_booking", JSON.stringify(data)); } catch(err){}
+    try { localStorage.setItem("redline_booking", JSON.stringify(data)); } catch(err){}
 
     var d = new Date(data.date + "T12:00:00");
     var nice = d.toLocaleDateString(undefined, {weekday:"long", month:"long", day:"numeric"});
